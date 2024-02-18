@@ -1,96 +1,30 @@
-# Obsidian Sample Plugin
+# Obsidian MBlog Plugin
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+Obsidian的MBlog平台插件,目前支持发布单篇文章到[MBlog](https://dev.mblog.club).
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+1. 先去[MBlog](https://dev.mblog.club)后台开启API接口,这个是付费功能,免费用户不支持.
+2. 打开你的Obsidian安装本插件.
+3. 在插件设置里填入第一步开启的`api token`.
+4. 任选一篇文章右键点击`发布到MBlog平台`选项.
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+对文章有以下要求:
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+必须要有[Front Matter](https://v1.vuepress.vuejs.org/zh/guide/frontmatter.html),它定义了一篇文章的一些基本信息,Obsidian本身也是支持的,在正文部分输入`---`就会弹出相关提示.
 
-## First time developing plugins?
+支持以下字段,除了title字段外,其它字段都是选填.
 
-Quick starting guide for new plugin devs:
+| 字段|含义| 类型|说明 |
+| --- | --- | --- | --- |
+|title  |文章标题  |字符串  |必填,不填无法发布|
+|link|文章链接|字符串|不必填,不填默认取title字段,不能包含`/`,`#`等特殊符号|
+|pubDate|文章发布日期|日期,YYYY-MM-DD|不必填,默认取当前时间|
+|tags|文章标签|标签|不必填,默认为空|
+|draft|是否是草稿|复选框|不必填,默认不是草稿|
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+显示在obsidian里如下:
 
-## Releasing new releases
+![1708249894503.png](https://cdn.mblog.club/2024/02/18/65d1d32903395.png).
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+完成上述设置后,右键点击obsidian左侧的你需要发布的文章,选中`发布到MBlog平台`,成功或失败右上角会有提示.
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
-
-## Adding your plugin to the community plugin list
-
-- Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
-
-## How to use
-
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
-
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
-
-## API Documentation
-
-See https://github.com/obsidianmd/obsidian-api
+![1708250145167.png](https://cdn.mblog.club/2024/02/18/65d1d422eface.png)
