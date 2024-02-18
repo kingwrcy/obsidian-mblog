@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "obsidian-mblog-publish",
+	"name": "MBlog Publish",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "通过Obsidian发布文章到MBlog平台",
+	"author": "Jerry",
+	"authorUrl": "https://dev.mblog.club",
+	"fundingUrl": "https://dev.mblog.club",
 	"isDesktopOnly": false
 }
