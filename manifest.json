@@ -1,5 +1,5 @@
 {
-	"id": "obsidian-mblog-publish",
+	"id": "mblog-publish",
 	"name": "MBlog Publish",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
