@@ -8,16 +8,17 @@ import {
 	TFile,
 	TFolder,
 	Vault,
-	parseYaml
+	parseYaml,
+	requestUrl,
 } from "obsidian";
 
 // Remember to rename these classes and interfaces!
 
-interface MyPluginSettings {
+interface MBlogSettings {
 	token: string;
 }
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
+const DEFAULT_SETTINGS: MBlogSettings = {
 	token: "",
 };
 
@@ -63,7 +64,8 @@ const publish2Mblog = async (
 			new Notice("正文部分为空,无法发布.");
 			return;
 		}
-		const res = await fetch("https://bzur0u.laf.run/api/v1/createPost", {
+		const res = await requestUrl({
+			url: "https://bzur0u.laf.run/api/v1/createPost",
 			method: "POST",
 			headers: {
 				"content-type": "application/json;charset=utf-8",
@@ -89,8 +91,8 @@ const publish2Mblog = async (
 	}
 };
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+export default class MBlogPlugin extends Plugin {
+	settings: MBlogSettings;
 
 	async onload() {
 		const { vault } = this.app;
@@ -108,9 +110,8 @@ export default class MyPlugin extends Plugin {
 			})
 		);
 
-
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new MBlogSettingTab(this.app, this));
 	}
 
 	onunload() {}
@@ -128,11 +129,10 @@ export default class MyPlugin extends Plugin {
 	}
 }
 
+class MBlogSettingTab extends PluginSettingTab {
+	plugin: MBlogPlugin;
 
-class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
-
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: MBlogPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
