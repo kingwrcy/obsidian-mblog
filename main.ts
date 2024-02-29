@@ -98,7 +98,6 @@ export default class MBlogPlugin extends Plugin {
 		const token = this.settings.token;
 		this.registerEvent(
 			this.app.workspace.on("file-menu", (menu, file) => {
-				console.log('file is ',file)
 				if (file instanceof TFile) {
 					menu.addItem((item) => {
 						item.setTitle("发布到MBlog平台 👈")
