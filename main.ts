@@ -78,12 +78,11 @@ const publish2Mblog = async (
 				content: contentAfterSecondDash,
 			}),
 		});
-		const result = await res.json();
-		if (result.success) {
+		if (res.json.success) {
 			new Notice("发布成功!");
 			return;
 		}
-		new Notice(`发布失败,${result.msg}.`);
+		new Notice(`发布失败,${res.json.msg}.`);
 	} else if (file instanceof TFolder) {
 		new Notice("暂不支持直接发布文件夹!");
 	}
