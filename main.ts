@@ -12,8 +12,6 @@ import {
 	requestUrl,
 } from "obsidian";
 
-// Remember to rename these classes and interfaces!
-
 interface MBlogSettings {
 	token: string;
 }
@@ -100,17 +98,19 @@ export default class MBlogPlugin extends Plugin {
 		const token = this.settings.token;
 		this.registerEvent(
 			this.app.workspace.on("file-menu", (menu, file) => {
-				menu.addItem((item) => {
-					item.setTitle("发布到MBlog平台 👈")
-						.setIcon("upload-cloud")
-						.onClick(async () => {
-							publish2Mblog(vault, file, token);
-						});
-				});
+				console.log('file is ',file)
+				if (file instanceof TFile) {
+					menu.addItem((item) => {
+						item.setTitle("发布到MBlog平台 👈")
+							.setIcon("upload-cloud")
+							.onClick(async () => {
+								publish2Mblog(vault, file, token);
+							});
+					});
+				}
 			})
 		);
 
-		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new MBlogSettingTab(this.app, this));
 	}
 

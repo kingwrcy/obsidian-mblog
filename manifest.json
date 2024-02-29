@@ -3,9 +3,9 @@
 	"name": "MBlog Publish",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "通过Obsidian发布文章到MBlog平台",
+	"description": "发布文章到MBlog平台,目前支持单篇文章发布",
 	"author": "Jerry",
 	"authorUrl": "https://dev.mblog.club",
-	"fundingUrl": "https://dev.mblog.club",
+	"fundingUrl": "",
 	"isDesktopOnly": false
 }
